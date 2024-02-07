@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <div style={{cursor:'pointer'}} className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex  align-items-center  justify-content-between '>
       <NavLink className='text-decoration-none ' to={'/'}>
-        <h2 className='logo mt-1' style={{color:'gold'}}>Max Win Slot</h2>
+        <h2 className='logo mt-1' style={{color:'gold'}}>Max Win</h2>
       </NavLink>
       <div className='d-flex gap-2  gap-sm-4 align-items-center '>
         {/*  Login And Register Btn
