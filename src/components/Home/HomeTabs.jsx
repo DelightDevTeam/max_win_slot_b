@@ -3,6 +3,19 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import sport from '../../assets/img/homeTab/sport.png'
+import allGames from '../../assets/img/homeTab/allGames.png'
+import hot from '../../assets/img/homeTab/hot.png'
+import h1 from '../../assets/img/homeTab/h1.png'
+import h2 from '../../assets/img/homeTab/h2.png'
+import h3 from '../../assets/img/homeTab/h3.png'
+import h4 from '../../assets/img/homeTab/h4.png'
+import h5 from '../../assets/img/homeTab/h5.png'
+import h6 from '../../assets/img/homeTab/h6.png'
+import h7 from '../../assets/img/homeTab/h7.png'
+import h8 from '../../assets/img/homeTab/h8.png'
+import h9 from '../../assets/img/homeTab/h9.png'
+import h10 from '../../assets/img/homeTab/h10.png'
+
 import esport from '../../assets/img/homeTab/esport.png'
 import casino from '../../assets/img/homeTab/casino.png'
 import slots from '../../assets/img/homeTab/slots.png'
@@ -53,20 +66,22 @@ import sports2 from '../../assets/img/homeTab/sport3 (1).png';
 
 function HomeTabs() {
     const tabs=[
-        {id:1,img:sport,title:'Sports'},
+        {id:1,img:allGames,title:'All Games'},
+        {id:2,img:hot,title:'Hot Games'},
+        {id:3,img:slots,title:'Slots'},
+        {id:4,img:sport,title:'Sports'},
         // {id:2,img:esport,title:'E-Sports'},
-        {id:3,img:casino,title:'Live Casinos'},
-        {id:4,img:slots,title:'Slots'},
-        {id:5,img:fish,title:'Fish Hunter '}
+        {id:5,img:casino,title:'Live Casinos'},
         // {id:6,img:cock,title:'Cock Fighting'},
         // {id:7,img:horse,title:'Horse Racing'},
     ];
     const contentTabs=[
-        {id:1,imgs:[sport2,sports1,sports2,sport5,sport6,sport7,sport8,sport9]},
+      {id:1,imgs:[]},
+        {id:2,imgs:[h1,h2,h3,h4,h5,h6,h7,h8,h9,h10]},
+        {id:4,imgs:[sports2,sports1,sport3,sport4]},
         // {id:2,imgs:[esport1,esport1,esport1]},
-        {id:3,imgs:[casino1,casino2,casino3,casino4,casino5,casino6,casino7,casino8,casino9,casino10]},
-        {id:4,imgs:[slot1,slot2,slot3,slot4,slot5,slot6,slot7,slot8,slot9,slot10]},
-        {id:5,imgs:[fish1,fish2,fish3,fish4,fish5,fish6]}
+        {id:5,imgs:[casino1,casino2,casino3,casino4 ]},
+        {id:3,imgs:[slot1,slot2,slot3,slot4,slot5,slot6,slot7,slot8]},
         // {id:6,imgs:[cock1,cock1,cock1]},
         // {id:7,imgs:[horse1,horse1,horse1]}
     ]
@@ -78,7 +93,7 @@ function HomeTabs() {
               <Nav.Item>
             {tabs.map((tab)=>{
             return <Nav.Link className='border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center ' eventKey={tab.id}>
-                <img  className='h-lg-50' src={tab.img} />
+                <img  style={{height:'35px'}} src={tab.img} />
                 <span className='tabTitle text-center text-light'>{tab.title}</span>
             </Nav.Link>
              })}
@@ -88,14 +103,14 @@ function HomeTabs() {
         </div>
         <div >
           <Tab.Content>
-            <div className="container">
+            <div className="container" style={{widht:'100%'}}>
             {contentTabs.map((item)=>{
-                return <Tab.Pane className='row ' eventKey={item.id}>
-                    {item.imgs.map((img)=>{
-                        return <img className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
-                    })}
-                </Tab.Pane>
-
+                 return <Tab.Pane className='row ' eventKey={item.id}>
+                {item.id===1 ? <AllGamesContent/>:
+                item.imgs.map((img)=>{
+                  return  <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+              })} 
+            </Tab.Pane>
             })}
             </div>
           </Tab.Content>
@@ -106,3 +121,37 @@ function HomeTabs() {
 }
 
 export default HomeTabs;
+
+const AllGamesContent=()=>{
+ const sports=[sports2,sports1,sport3,sport4]
+  // {id:2,imgs:[esport1,esport1,esport1]},
+ const casinos=[casino1,casino2,casino3,casino4 ];
+  const slots=[slot1,slot2,slot3,slot4,slot5,slot6,slot7,slot8]
+  return <div className='ms-4'>
+      <div className="mb-5 ">
+        <h3 className="text-white mb-3">Slots</h3>
+       <div className="row">
+       {slots.map((img)=>{
+        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+       })}
+       </div>
+      </div>
+      <div className="mb-5 ">
+        <h3 className="text-white mb-3">Sports</h3>
+       <div className="row">
+       {sports.map((img)=>{
+        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+       })}
+       </div>
+      </div>
+      <div className="mb-5 ">
+        <h3 className="text-white mb-3">Live-Casinos</h3>
+       <div className="row">
+       {casinos.map((img)=>{
+        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+       })}
+       </div>
+      </div>
+
+  </div>
+}
