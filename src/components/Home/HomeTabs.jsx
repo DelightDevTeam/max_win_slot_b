@@ -63,6 +63,7 @@ import horse1 from '../../assets/img/homeTab/horse1.png'
 
 import sports1 from '../../assets/img/homeTab/asia_gaming.png';
 import sports2 from '../../assets/img/homeTab/sport3 (1).png';
+import '../../assets/css/home.css'
 
 function HomeTabs() {
     const tabs=[
@@ -108,7 +109,7 @@ function HomeTabs() {
                  return <Tab.Pane className='row ' eventKey={item.id}>
                 {item.id===1 ? <AllGamesContent/>:
                 item.imgs.map((img)=>{
-                  return  <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+                  return  <img  style={{objectFit:'cover'}} className={`img-fluid  col-6 col-lg-4 col-xl-3 mb-4  rounded-sm-5 ${item.id===2 ? 'hotImg' :'gameImg'} `} src={img} />
               })} 
             </Tab.Pane>
             })}
@@ -123,16 +124,16 @@ function HomeTabs() {
 export default HomeTabs;
 
 const AllGamesContent=()=>{
- const sports=[sports2,sports1,sport3,sport4]
+ const sports=[sports2,sport3,sport4]
   // {id:2,imgs:[esport1,esport1,esport1]},
  const casinos=[casino1,casino2,casino3,casino4 ];
   const slots=[slot1,slot2,slot3,slot4,slot5,slot6,slot7,slot8]
-  return <div className='ms-4'>
+  return <div className='ms-1'>
       <div className="mb-5 ">
         <h3 className="text-white mb-3">Slots</h3>
        <div className="row">
        {slots.map((img)=>{
-        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+        return <img  className='img-fluid gameImg col-6  col-lg-4 col-xl-3 mb-4 ' src={img} />
        })}
        </div>
       </div>
@@ -140,7 +141,7 @@ const AllGamesContent=()=>{
         <h3 className="text-white mb-3">Sports</h3>
        <div className="row">
        {sports.map((img)=>{
-        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+        return <img  className=' col-6  col-lg-4  col-xl-3 mb-4  img-fluid gameImg' src={img} />
        })}
        </div>
       </div>
@@ -148,7 +149,7 @@ const AllGamesContent=()=>{
         <h3 className="text-white mb-3">Live-Casinos</h3>
        <div className="row">
        {casinos.map((img)=>{
-        return <img style={{objectFit:'cover',height:'200px',}} className='col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 rounded-5' src={img} />
+        return <img  className='col-6 col-lg-4 col-xl-3 mb-4  img-fluid gameImg' src={img} />
        })}
        </div>
       </div>
