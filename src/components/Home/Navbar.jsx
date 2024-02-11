@@ -38,7 +38,7 @@ const Navbar = () => {
         {id:7,title:'SEXY BACCARAT',value:'0.00'},
     ];
   return (
-    <div style={{cursor:'pointer'}} className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex  align-items-center  justify-content-between '>
+    <div style={{cursor:'pointer'}} className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex flex-wrap align-items-center  justify-content-between '>
       <NavLink className='text-decoration-none ' to={'/'}>
         <h2 className='logo mt-1' style={{color:'gold'}}>Max Win</h2>
       </NavLink>
@@ -57,6 +57,11 @@ const Navbar = () => {
         <NavLink to={'/profile'}><i  className="fa-solid fa-user  text-light"></i></NavLink>
         <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink>
         <i  class="fa-solid fa-right-from-bracket text-light"></i>
+        <NavLink to={'/login'}>
+        <button style={{border:'2px solid #FFD700',background:'none',fontSize:'13px',color:'#FFD700',padding:'6px 30px'}} className='bg-none rounded-2 ' >
+          LOGIN
+        </button>
+        </NavLink>
       </div>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
