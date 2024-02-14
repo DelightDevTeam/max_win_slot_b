@@ -10,6 +10,11 @@ body{
     height: 350px ;
     object-fit: cover ;
 }
+.gameImg{
+    height: 100px;
+    width: 200px;
+}
+
 footer{
     background: linear-gradient(0deg,#02293a,#00354D);
     box-shadow: 0 -5px 10px #0000004d;
@@ -28,14 +33,15 @@ footer{
     display: none !important;
     visibility: hidden !important;
 }
-.gameImg{
-    height: 200px;
-    border-radius: 20px;
+@media screen and (min-width:980px) and (max-width:1030px) {
+    .hotGameImg{
+        height:200px;
+    }
 }
-.hotImg{
-    height:250px;
-    object-fit: cover;
-    border-radius:15px;
+@media screen and (min-width:570px) and (max-width:979px) {
+    .hotGameImg{
+        height:230px;
+    }
 }
 @media screen and (max-width:860px) {
     .tabTitle{
@@ -48,14 +54,7 @@ footer{
         height: 250px ;
     }
 }
-@media screen and (max-width:600px){
-    .gameImg{
-        height: 150px;
-    }
-    .hotImg{
-        height: 150px;
-    }
-}
+
 @media screen and (max-width:580px) {
     
     .bannerImg{
@@ -71,23 +70,20 @@ footer{
         padding: 0 20px;
     }
 }
-@media screen and (max-width:550px){
-    .gameImg{
-        height: 100px;
-        border-radius:20px;
-    }
-}
+
 @media screen and (max-width:400px){
     .hotImg{
         height: 120px;
     }
 }
+@media screen and (max-width:390px){
+
+.gameImg{
+    height: 80px;
+} 
+}
 @media screen and (max-width:380px){
-        .gameImg{
-            width: 50%;
-            height: 50%;
-            border-radius:20px;
-        }
+   
     .tabTitle{
         padding: 0 10px;
     }
@@ -105,11 +101,15 @@ footer{
     }
 }
 @media screen and (max-width:340px) {
+    
     .logo{
         font-size: 20px;
     }
 }
 @media screen and (max-width:320px) {
+    .gameImg{
+        height: 60px;
+    } 
 .fa-solid{
         font-size: 18px !important;
     }

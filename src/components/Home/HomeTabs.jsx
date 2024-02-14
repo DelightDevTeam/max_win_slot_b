@@ -147,8 +147,8 @@ function HomeTabs() {
           </Nav>
         </div>
         <div>
-          <Tab.Content>
-            <div className="container" style={{ widht: "100%" }}>
+          <Tab.Content className="ms-sm-5">
+            <div className="container" style={{ width: "100%" }}>
               <Tab.Pane className="row " eventKey={3}>
                 {slotGames.providers?.map((slotGame) => {
                   return (
@@ -167,9 +167,9 @@ function HomeTabs() {
                         localStorage.setItem("title", slotGame.description);
                       }}
                     >
-                      <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid rounded-sm-5`}
+                      <img 
+                       
+                        className={`img-fluid rounded-sm-5 gameImg `}
                         src={slotGame.img_url}
                       />
                     </Link>
@@ -181,7 +181,7 @@ function HomeTabs() {
                   return (
                     <Link
                       to={"/games"}
-                      className="col-6 col-lg-4 col-xl-3 mb-4"
+                      className="col-6 col-lg-4 col-xl-6 mb-4"
                       onClick={() => {
                         localStorage.removeItem("provider_id");
                         localStorage.removeItem("gameType_id");
@@ -195,13 +195,15 @@ function HomeTabs() {
                       }}
                     >
                       <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid rounded-sm-5`}
+                        
+                        className={`img-fluid rounded-sm-5 gameImg`}
                         src={sportGame.img_url}
                       />
+                      
                     </Link>
                   );
                 })}
+                
               </Tab.Pane>
               <Tab.Pane className="row " eventKey={5}>
                 {casinoGames.providers?.map((casinoGame) => {
@@ -222,8 +224,8 @@ function HomeTabs() {
                       }}
                     >
                       <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid mb-4 rounded-sm-5`}
+                         
+                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
                         src={casinoGame.img_url}
                       />
                     </Link>
@@ -234,8 +236,8 @@ function HomeTabs() {
                 {hotGames?.map((hotGame) => {
                   return (
                     <img
-                      style={{ objectFit: "cover" }}
-                      className={`img-fluid  col-6 col-lg-4 col-xl-3 mb-4  rounded-sm-5`}
+                     style={{objectFit:"cover"}}
+                      className={`img-fluid hotGameImg  col-6 col-lg-4 col-xl-3 mb-4  rounded-sm-5`}
                       src={hotGame.img_url}
                       onClick={() => launchGame(hotGame.id)}
                     />
@@ -262,8 +264,8 @@ function HomeTabs() {
                       }}
                     >
                       <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid rounded-sm-5`}
+                       
+                        className={`img-fluid rounded-sm-5 gameImg`}
                         src={slotGame.img_url}
                       />
                     </Link>
@@ -289,8 +291,8 @@ function HomeTabs() {
                       }}
                     >
                       <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid rounded-sm-5`}
+                       
+                        className={`img-fluid rounded-sm-5 gameImg`}
                         src={sportGame.img_url}
                       />
                     </Link>
@@ -316,8 +318,8 @@ function HomeTabs() {
                       }}
                     >
                       <img
-                        style={{ objectFit: "cover" }}
-                        className={`img-fluid mb-4 rounded-sm-5`}
+                       
+                        className={`img-fluid mb-4 rounded-sm-5 gameImg`}
                         src={casinoGame.img_url}
                       />
                     </Link>
