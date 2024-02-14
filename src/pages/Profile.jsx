@@ -22,7 +22,7 @@ const Profile = () => {
           <img src={avatar} alt="" />
           <div className='mx-3'>
             <p className='fw-bold h3' style={{color:'#eee'}}>Angel</p>
-            <small style={{color:'#ddd'}}>Welcome to Asia Slot Bet</small>
+            <small style={{color:'#ddd'}}>Welcome to Max Win</small>
           </div>
         </div>
 
@@ -33,7 +33,7 @@ const Profile = () => {
       className="mb-3"
       fill
     >
-      <Tab eventKey="home" className="custom-tab-menu nav-tabs" title={<><img src={profile} alt="Home" className="custom-tab-menu-icon" /> <div className='text-white'>ကိုယ်ရေးအကျည်း</div></>}>
+      <Tab eventKey="home" className="custom-tab-menu nav-tabs" title={<><img src={profile} alt="Home" className="custom-tab-menu-icon" /> <div >ကိုယ်ရေးအကျည်း</div></>}>
         <div className="custom-tab-content">
           {
               <Form>
@@ -42,31 +42,15 @@ const Profile = () => {
                 <Form.Control className='form-control-input' type="email" placeholder="" />
               </Form.Group>
               <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email</Form.Label>
-                <Form.Control className='form-control-input' type="email" placeholder="" />
-              </Form.Group>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-                <Form.Label>အမည် အပြည့်အစုံ</Form.Label>
-                <Form.Control className='form-control-input' type="email" placeholder="" />
-              </Form.Group>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
                 <Form.Label>ဆက်သွယ်ရန် ဖုန်းနံပတ်</Form.Label>
                 <Form.Control className='form-control-input' type="email" placeholder="" />
               </Form.Group>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-              <h6 className='text-warning mt-4'>လိင်</h6>
-                <Form.Select aria-label="Default select example">
-                  <option value={''}>Please select Gender</option>
-                  <option value={'male'}>Male</option>
-                  <option value={'female'}>Female</option>
-
-                </Form.Select>
-               </Form.Group>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-                <Form.Label >မွေးရက်နေ့</Form.Label>
-                <Form.Control className='form-control-input' type="date" placeholder="" />
+              <Form.Group className="mb-5 mx-md-5" controlId="exampleForm.ControlInput1">
+              <Form.Label >Image</Form.Label>
+              <Form.Control className='form-control-input'
+                type="file"
+              />
               </Form.Group>
-
               <div className='d-flex justify-content-center'>
               <button className='profile-btn w-75'>တင်သွင်းသည်</button>
               </div>
@@ -74,35 +58,8 @@ const Profile = () => {
           }
         </div>
       </Tab>
-      <Tab eventKey="bank" className="custom-tab-menu" title={<><img src={Bank} alt="Bank" className="custom-tab-menu-icon"/> <div className='text-white'>ဘဏ်အချက်အလက်</div></>}>
-        <div className="custom-tab-content">
-          {
-            <Form>
-            <Form.Group className="mb-3 mx-5" controlId="profileForm.ControlInput1">
-            <h6 className='text-warning mt-4'>ဘဏ်</h6>
-                <Form.Select aria-label="Default select example">
-                  <option value={''}>Please select Bank</option>
-                  {banks.map((bank)=>{
-                    return <option value={bank}>{bank}</option>
-                  })}
-                </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="profileForm.ControlInput2">
-              <Form.Label>ဘဏ် အမည်</Form.Label>
-              <Form.Control className='form-control-input' type="email" placeholder="" />
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="profileForm.ControlInput3">
-              <Form.Label>ဘဏ် အကောင့်နံပတ်</Form.Label>
-              <Form.Control className='form-control-input' type="email" placeholder="" />
-            </Form.Group>
-            <div className='d-flex justify-content-center'>
-            <button className='profile-btn w-75'>တင်သွင်းသည်</button>
-            </div>
-          </Form>
-          }
-        </div>
-      </Tab>
-      <Tab eventKey="change-password" className="custom-tab-menu" title={<><img src={Password} alt="Change Password" className="custom-tab-menu-icon"/> <div className='text-white'>စကား၀က်ကို ပြောင်းပါ</div></>}>
+     
+      <Tab eventKey="change-password" className="custom-tab-menu" title={<><img src={Password} alt="Change Password" className="custom-tab-menu-icon"/> <div  >စကား၀က်ကို ပြောင်းပါ</div></>}>
         <div className="custom-tab-content">
           {
             <Form>

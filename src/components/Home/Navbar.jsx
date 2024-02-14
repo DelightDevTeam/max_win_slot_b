@@ -50,12 +50,9 @@ const Navbar = () => {
         <button className='border border-none bg-transparent' style={{outline:'none'}} onClick={handleShow}>
           <i className=" fa-solid fa-wallet text-light "></i> 
         </button>
-        <div className='text-light d-flex align-items-center flex-nowrap '>
-            <i   className="fa-solid fa-life-ring text-light"></i>
-            <span className='mx-2 fw-bolder '>: 0</span>
-        </div>
+        
         <NavLink to={'/profile'}><i  className="fa-solid fa-user  text-light"></i></NavLink>
-        <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink>
+        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
         <i  class="fa-solid fa-right-from-bracket text-light"></i>
         <NavLink to={'/login'}>
         <button style={{border:'2px solid #FFD700',background:'none',fontSize:'13px',color:'#FFD700',padding:'6px 30px'}} className='bg-none rounded-2 ' >

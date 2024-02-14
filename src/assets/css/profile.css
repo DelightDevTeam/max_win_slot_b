@@ -14,6 +14,10 @@
     text-shadow: 0 0 5px goldenrod;
     background-color: transparent;
   }
+  .custom-tab-menu-icon.active div{
+    color: black;
+   
+  }
   
   .custom-tab-content {
     /* Add your custom styles for tab content here */
