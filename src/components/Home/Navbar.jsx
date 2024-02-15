@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Modal, Table } from "react-bootstrap";
@@ -8,7 +8,12 @@ const Navbar = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let auth = localStorage.getItem("authToken");
+
+  const [auth, setAuth] = useState();
+
+  useEffect(() => {
+    setAuth(localStorage.getItem("authToken"));
+  }, []);
 
   const modals = [
     { id: 1, title: "MBBET", value: "0.00" },
@@ -64,13 +69,22 @@ const Navbar = () => {
           <i className="fa-solid fa-life-ring text-light"></i>
           <span className="mx-2 fw-bolder ">: 0</span>
         </div>
+
         <NavLink to={"/profile"}>
           <i className="fa-solid fa-user  text-light"></i>
         </NavLink>
-        <NavLink to={"/incomeletter"}>
+        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
+
+        {auth && (
+          <button className="btn">
+            <i class="fa-solid fa-right-from-bracket text-light"></i>
+          </button>
+        )}
+
+        {/* <NavLink to={"/incomeletter"}>
           <i class="fa-solid fa-comment-dots text-light"></i>
-        </NavLink>
-        <i class="fa-solid fa-right-from-bracket text-light"></i>
+        </NavLink> */}
+        {/* <i class="fa-solid fa-right-from-bracket text-light"></i> */}
         {!auth && (
           <NavLink to={"/login"}>
             <button
