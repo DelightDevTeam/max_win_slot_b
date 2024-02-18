@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import { Modal, Table } from 'react-bootstrap';
+import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { Modal, Table } from "react-bootstrap";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [auth, setAuth] = useState();
 
   useEffect(() => {
-    setAuth(localStorage.getItem('authToken'));
+    setAuth(localStorage.getItem("authToken"));
   }, []);
 
   const handleClose = () => setShow(false);
@@ -20,32 +24,32 @@ const Navbar = () => {
     setAuth(null); // Update auth state to reflect logout
   };
   const modals = [
-    { id: 1, title: 'MBBET', value: '0.00' },
-    { id: 2, title: 'WBET', value: '0.00' },
-    { id: 3, title: 'EVOLUTION GAMING', value: '0.00' },
-    { id: 4, title: 'KING855', value: '0.00' },
-    { id: 5, title: 'SA GAMING', value: '0.00' },
-    { id: 6, title: 'WM CASINO', value: '0.00' },
-    { id: 7, title: 'YEEBET', value: '0.00' },
-    { id: 1, title: 'DRAGON SOFT', value: '0.00' },
-    { id: 2, title: 'EVOPLAY', value: 'maintainance' },
-    { id: 3, title: 'GAMEPLAY', value: '0.00' },
-    { id: 4, title: 'JOKER', value: '0.00' },
-    { id: 5, title: 'MICROGAMING', value: '0.00' },
-    { id: 6, title: 'PG SOFT', value: '0.00' },
-    { id: 7, title: 'PNG', value: '0.00' },
-    { id: 2, title: 'PRAGEMIC', value: 'maintainance' },
-    { id: 3, title: 'SIMPLEPLAY', value: '0.00' },
-    { id: 4, title: 'DIGMANN', value: '0.00' },
-    { id: 5, title: 'ALLBET', value: '0.00' },
-    { id: 6, title: 'LIVE22', value: '0.00' },
-    { id: 7, title: 'Pinnacle', value: '0.00' },
-    { id: 2, title: 'RCB988', value: 'maintainance' },
-    { id: 3, title: 'SBO', value: '0.00' },
-    { id: 4, title: 'ROYAL SLOT', value: '0.00' },
-    { id: 5, title: 'ADVANTPLAY', value: '0.00' },
-    { id: 6, title: 'JILI', value: '0.00' },
-    { id: 7, title: 'SEXY BACCARAT', value: '0.00' },
+    { id: 1, title: "MBBET", value: "0.00" },
+    { id: 2, title: "WBET", value: "0.00" },
+    { id: 3, title: "EVOLUTION GAMING", value: "0.00" },
+    { id: 4, title: "KING855", value: "0.00" },
+    { id: 5, title: "SA GAMING", value: "0.00" },
+    { id: 6, title: "WM CASINO", value: "0.00" },
+    { id: 7, title: "YEEBET", value: "0.00" },
+    { id: 1, title: "DRAGON SOFT", value: "0.00" },
+    { id: 2, title: "EVOPLAY", value: "maintainance" },
+    { id: 3, title: "GAMEPLAY", value: "0.00" },
+    { id: 4, title: "JOKER", value: "0.00" },
+    { id: 5, title: "MICROGAMING", value: "0.00" },
+    { id: 6, title: "PG SOFT", value: "0.00" },
+    { id: 7, title: "PNG", value: "0.00" },
+    { id: 2, title: "PRAGEMIC", value: "maintainance" },
+    { id: 3, title: "SIMPLEPLAY", value: "0.00" },
+    { id: 4, title: "DIGMANN", value: "0.00" },
+    { id: 5, title: "ALLBET", value: "0.00" },
+    { id: 6, title: "LIVE22", value: "0.00" },
+    { id: 7, title: "Pinnacle", value: "0.00" },
+    { id: 2, title: "RCB988", value: "maintainance" },
+    { id: 3, title: "SBO", value: "0.00" },
+    { id: 4, title: "ROYAL SLOT", value: "0.00" },
+    { id: 5, title: "ADVANTPLAY", value: "0.00" },
+    { id: 6, title: "JILI", value: "0.00" },
+    { id: 7, title: "SEXY BACCARAT", value: "0.00" },
   ];
   return (
     <div className='border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between'>
@@ -69,9 +73,11 @@ const Navbar = () => {
         <NavLink to={'/profile'}>
           <i className='fa-solid fa-user text-light'></i>
         </NavLink>
-        {auth ? (
-          <button className='btn' onClick={logout}>
-            <i className='fa-solid fa-right-from-bracket text-light'></i>
+        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
+
+        {auth && (
+          <button className="btn">
+            <i class="fa-solid fa-right-from-bracket text-light"></i>
           </button>
         ) : (
           <NavLink to={'/login'}>
@@ -98,13 +104,13 @@ const Navbar = () => {
           <Table striped bordered className='table-dark'>
             <thead>
               <tr>
-                <th>ပင်မ ပိုက်ဆံအိတ်</th>
-                <th>0.00</th>
+                <th>Wallet</th>
+                <th>K {parseFloat(user?.balance).toLocaleString()}</th>
               </tr>
             </thead>
             <tbody>
               {modals.map((modal) => (
-                <tr key={modal.id}>
+                <tr>
                   <td>{modal.title}</td>
                   <td>{modal.value}</td>
                 </tr>

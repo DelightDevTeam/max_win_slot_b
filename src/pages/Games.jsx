@@ -15,7 +15,7 @@ export default function Games() {
   } = useFetch(
     BASE_URL + "/gamedetail/" + providerId + "/game_type/" + gameTypeId
   );
-  console.log(games);
+  // console.log(games);
   const launchGame = (gameId) => {
     //fetch api calling
     fetch(BASE_URL + "/launchGame/" + gameId, {
@@ -43,7 +43,7 @@ export default function Games() {
   return (
     <>
       <div className="container-fluid my-5">
-        <h3 className="text-center mb-5 fw-bold">{gameTitle}</h3>
+        <h3 className="text-center mb-5 text-light">{gameTitle}</h3>
         <div className="row">
           {games &&
             games.map((game, index) => (
