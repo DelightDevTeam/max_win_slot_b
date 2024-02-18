@@ -3,7 +3,6 @@
 
 .nav-tabs{
     border: none;
-    background-color: transparent I !important;
 }
   .custom-tab-menu-icon{
     width: 30px;
@@ -16,7 +15,6 @@
   }
   .custom-tab-menu-icon.active div{
     color: black;
-   
   }
   
   .custom-tab-content {
