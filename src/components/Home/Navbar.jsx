@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { Modal, Table } from "react-bootstrap";
+import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Modal, Table } from 'react-bootstrap';
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -12,72 +12,72 @@ const Navbar = () => {
   const [auth, setAuth] = useState();
 
   useEffect(() => {
-    setAuth(localStorage.getItem("authToken"));
+    setAuth(localStorage.getItem('authToken'));
   }, []);
 
   const modals = [
-    { id: 1, title: "MBBET", value: "0.00" },
-    { id: 2, title: "WBET", value: "0.00" },
-    { id: 3, title: "EVOLUTION GAMING", value: "0.00" },
-    { id: 4, title: "KING855", value: "0.00" },
-    { id: 5, title: "SA GAMING", value: "0.00" },
-    { id: 6, title: "WM CASINO", value: "0.00" },
-    { id: 7, title: "YEEBET", value: "0.00" },
-    { id: 1, title: "DRAGON SOFT", value: "0.00" },
-    { id: 2, title: "EVOPLAY", value: "maintainance" },
-    { id: 3, title: "GAMEPLAY", value: "0.00" },
-    { id: 4, title: "JOKER", value: "0.00" },
-    { id: 5, title: "MICROGAMING", value: "0.00" },
-    { id: 6, title: "PG SOFT", value: "0.00" },
-    { id: 7, title: "PNG", value: "0.00" },
-    { id: 2, title: "PRAGEMIC", value: "maintainance" },
-    { id: 3, title: "SIMPLEPLAY", value: "0.00" },
-    { id: 4, title: "DIGMANN", value: "0.00" },
-    { id: 5, title: "ALLBET", value: "0.00" },
-    { id: 6, title: "LIVE22", value: "0.00" },
-    { id: 7, title: "Pinnacle", value: "0.00" },
-    { id: 2, title: "RCB988", value: "maintainance" },
-    { id: 3, title: "SBO", value: "0.00" },
-    { id: 4, title: "ROYAL SLOT", value: "0.00" },
-    { id: 5, title: "ADVANTPLAY", value: "0.00" },
-    { id: 6, title: "JILI", value: "0.00" },
-    { id: 7, title: "SEXY BACCARAT", value: "0.00" },
+    { id: 1, title: 'MBBET', value: '0.00' },
+    { id: 2, title: 'WBET', value: '0.00' },
+    { id: 3, title: 'EVOLUTION GAMING', value: '0.00' },
+    { id: 4, title: 'KING855', value: '0.00' },
+    { id: 5, title: 'SA GAMING', value: '0.00' },
+    { id: 6, title: 'WM CASINO', value: '0.00' },
+    { id: 7, title: 'YEEBET', value: '0.00' },
+    { id: 1, title: 'DRAGON SOFT', value: '0.00' },
+    { id: 2, title: 'EVOPLAY', value: 'maintainance' },
+    { id: 3, title: 'GAMEPLAY', value: '0.00' },
+    { id: 4, title: 'JOKER', value: '0.00' },
+    { id: 5, title: 'MICROGAMING', value: '0.00' },
+    { id: 6, title: 'PG SOFT', value: '0.00' },
+    { id: 7, title: 'PNG', value: '0.00' },
+    { id: 2, title: 'PRAGEMIC', value: 'maintainance' },
+    { id: 3, title: 'SIMPLEPLAY', value: '0.00' },
+    { id: 4, title: 'DIGMANN', value: '0.00' },
+    { id: 5, title: 'ALLBET', value: '0.00' },
+    { id: 6, title: 'LIVE22', value: '0.00' },
+    { id: 7, title: 'Pinnacle', value: '0.00' },
+    { id: 2, title: 'RCB988', value: 'maintainance' },
+    { id: 3, title: 'SBO', value: '0.00' },
+    { id: 4, title: 'ROYAL SLOT', value: '0.00' },
+    { id: 5, title: 'ADVANTPLAY', value: '0.00' },
+    { id: 6, title: 'JILI', value: '0.00' },
+    { id: 7, title: 'SEXY BACCARAT', value: '0.00' },
   ];
   return (
     <div
-      style={{ cursor: "pointer" }}
-      className="border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex flex-wrap align-items-center  justify-content-between "
+      style={{ cursor: 'pointer' }}
+      className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex flex-wrap align-items-center  justify-content-between '
     >
-      <NavLink className="text-decoration-none " to={"/"}>
-        <h2 className="logo mt-1" style={{ color: "gold" }}>
+      <NavLink className='text-decoration-none ' to={'/'}>
+        <h2 className='logo mt-1' style={{ color: 'gold' }}>
           Max Win
         </h2>
       </NavLink>
-      <div className="d-flex gap-2  gap-sm-4 align-items-center ">
+      <div className='d-flex gap-2  gap-sm-4 align-items-center '>
         {/*  Login And Register Btn
         <button className=' btn me-4 btn-outline-warning  text-uppercase fw-bold px-5'>Login</button>
         <button className='btn btn-warning   text-uppercase fw-bold px-5'>Register</button>
         */}
         <button
-          className="border border-none bg-transparent"
-          style={{ outline: "none" }}
+          className='border border-none bg-transparent'
+          style={{ outline: 'none' }}
           onClick={handleShow}
         >
-          <i className=" fa-solid fa-wallet text-light "></i>
+          <i className=' fa-solid fa-wallet text-light '></i>
         </button>
-        <div className="text-light d-flex align-items-center flex-nowrap ">
-          <i className="fa-solid fa-life-ring text-light"></i>
-          <span className="mx-2 fw-bolder ">: 0</span>
+        <div className='text-light d-flex align-items-center flex-nowrap '>
+          <i className='fa-solid fa-life-ring text-light'></i>
+          <span className='mx-2 fw-bolder '>: 0</span>
         </div>
 
-        <NavLink to={"/profile"}>
-          <i className="fa-solid fa-user  text-light"></i>
+        <NavLink to={'/profile'}>
+          <i className='fa-solid fa-user  text-light'></i>
         </NavLink>
         {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
 
         {auth && (
-          <button className="btn">
-            <i class="fa-solid fa-right-from-bracket text-light"></i>
+          <button className='btn'>
+            <i className='fa-solid fa-right-from-bracket text-light'></i>
           </button>
         )}
 
@@ -86,16 +86,16 @@ const Navbar = () => {
         </NavLink> */}
         {/* <i class="fa-solid fa-right-from-bracket text-light"></i> */}
         {!auth && (
-          <NavLink to={"/login"}>
+          <NavLink to={'/login'}>
             <button
               style={{
-                border: "2px solid #FFD700",
-                background: "none",
-                fontSize: "13px",
-                color: "#FFD700",
-                padding: "6px 30px",
+                border: '2px solid #FFD700',
+                background: 'none',
+                fontSize: '13px',
+                color: '#FFD700',
+                padding: '6px 30px',
               }}
-              className="bg-none rounded-2 "
+              className='bg-none rounded-2 '
             >
               LOGIN
             </button>
@@ -107,7 +107,7 @@ const Navbar = () => {
           <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Table striped bordered className="table-dark">
+          <Table striped bordered className='table-dark'>
             <thead>
               <tr>
                 <th>ပင်မ ပိုက်ဆံအိတ်</th>
@@ -116,7 +116,7 @@ const Navbar = () => {
             </thead>
             <tbody>
               {modals.map((modal) => (
-                <tr>
+                <tr key={modal.id}>
                   <td>{modal.title}</td>
                   <td>{modal.value}</td>
                 </tr>
