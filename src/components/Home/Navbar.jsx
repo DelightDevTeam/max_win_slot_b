@@ -7,11 +7,12 @@ import axios from "axios";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [auth, setAuth] = useState();
+  const [auth, setAuth] = useState(null);
 
   useEffect(() => {
     setAuth(localStorage.getItem("authToken"));
-  }, []);
+  }, [auth]);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   let navigate = useNavigate();
