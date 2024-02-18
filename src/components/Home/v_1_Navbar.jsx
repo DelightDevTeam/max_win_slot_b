@@ -5,20 +5,16 @@ import { Modal, Table } from 'react-bootstrap';
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [auth, setAuth] = useState();
 
   useEffect(() => {
     setAuth(localStorage.getItem('authToken'));
   }, []);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const logout = () => {
-    // Your logout logic here
-    localStorage.removeItem('authToken');
-    setAuth(null); // Update auth state to reflect logout
-  };
   const modals = [
     { id: 1, title: 'MBBET', value: '0.00' },
     { id: 2, title: 'WBET', value: '0.00' },
@@ -48,32 +44,48 @@ const Navbar = () => {
     { id: 7, title: 'SEXY BACCARAT', value: '0.00' },
   ];
   return (
-    <div className='border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between'>
-      <NavLink className='text-decoration-none' to={'/'}>
+    <div
+      style={{ cursor: 'pointer' }}
+      className='border-bottom  py-sm-1 py-3 px-2 px-sm-5  d-flex flex-wrap align-items-center  justify-content-between '
+    >
+      <NavLink className='text-decoration-none ' to={'/'}>
         <h2 className='logo mt-1' style={{ color: 'gold' }}>
           Max Win
         </h2>
       </NavLink>
-      <div className='d-flex gap-2 gap-sm-4 align-items-center'>
+      <div className='d-flex gap-2  gap-sm-4 align-items-center '>
+        {/*  Login And Register Btn
+        <button className=' btn me-4 btn-outline-warning  text-uppercase fw-bold px-5'>Login</button>
+        <button className='btn btn-warning   text-uppercase fw-bold px-5'>Register</button>
+        */}
         <button
           className='border border-none bg-transparent'
           style={{ outline: 'none' }}
           onClick={handleShow}
         >
-          <i className='fa-solid fa-wallet text-light'></i>
+          <i className=' fa-solid fa-wallet text-light '></i>
         </button>
-        <div className='text-light d-flex align-items-center flex-nowrap'>
+        <div className='text-light d-flex align-items-center flex-nowrap '>
           <i className='fa-solid fa-life-ring text-light'></i>
-          <span className='mx-2 fw-bolder'>: 0</span>
+          <span className='mx-2 fw-bolder '>: 0</span>
         </div>
+
         <NavLink to={'/profile'}>
-          <i className='fa-solid fa-user text-light'></i>
+          <i className='fa-solid fa-user  text-light'></i>
         </NavLink>
-        {auth ? (
-          <button className='btn' onClick={logout}>
+        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
+
+        {auth && (
+          <button className='btn'>
             <i className='fa-solid fa-right-from-bracket text-light'></i>
           </button>
-        ) : (
+        )}
+
+        {/* <NavLink to={"/incomeletter"}>
+          <i class="fa-solid fa-comment-dots text-light"></i>
+        </NavLink> */}
+        {/* <i class="fa-solid fa-right-from-bracket text-light"></i> */}
+        {!auth && (
           <NavLink to={'/login'}>
             <button
               style={{
@@ -83,7 +95,7 @@ const Navbar = () => {
                 color: '#FFD700',
                 padding: '6px 30px',
               }}
-              className='bg-none rounded-2'
+              className='bg-none rounded-2 '
             >
               LOGIN
             </button>

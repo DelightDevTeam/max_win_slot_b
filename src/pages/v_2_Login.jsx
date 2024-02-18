@@ -28,7 +28,13 @@ function LoginPage() {
       navigate('/');
     }
   }, [auth]);
-
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (!loginForm.password.trim() || !loginForm.username.trim()) {
+  //     return setValidated(true);
+  //   }
+  //   console.log("Login form", loginForm);
+  // };
   const onSubmit = (loginData) => {
     console.log(loginData);
     if (loginData) {
@@ -51,6 +57,7 @@ function LoginPage() {
         return response.json();
       })
       .then((responseData) => {
+        // console.log("Login successful:", responseData);
         if (responseData) {
           const userData = responseData.data.user;
           localStorage.setItem('authToken', responseData.data.token);
@@ -68,7 +75,6 @@ function LoginPage() {
         }
       });
   };
-
   return (
     <>
       {!auth && (
@@ -90,6 +96,7 @@ function LoginPage() {
           <Form.Group className='mb-3' controlId='formBasicEmail'>
             <Form.Label className='text-warning fw-bolder'>Phone</Form.Label>
             <Form.Control
+              id='phone'
               type='text'
               placeholder='Phone...'
               {...register('phone', {
@@ -103,6 +110,7 @@ function LoginPage() {
           <Form.Group className='mb-3' controlId='formBasicPassword'>
             <Form.Label className='text-warning fw-bolder'>Password</Form.Label>
             <Form.Control
+              id='password'
               type='password'
               placeholder='Password...'
               {...register('password', {
