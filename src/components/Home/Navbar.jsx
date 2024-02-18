@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Modal, Table } from 'react-bootstrap';
+import logo from '../../assets/img/logo.png'
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [auth, setAuth] = useState();
+  const navigate = useNavigate();
+  // const [auth, setAuth] = useState();
+  const auth = localStorage.getItem('authToken');
 
-  useEffect(() => {
-    setAuth(localStorage.getItem('authToken'));
-  }, []);
+    useEffect(() => {
+
+    }, [auth]);
+
+  // useEffect(() => {
+  //   setAuth(localStorage.getItem('authToken'));
+  // }, [auth]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,7 +24,7 @@ const Navbar = () => {
   const logout = () => {
     // Your logout logic here
     localStorage.removeItem('authToken');
-    setAuth(null); // Update auth state to reflect logout
+    navigate("/");
   };
   const modals = [
     { id: 1, title: 'MBBET', value: '0.00' },
@@ -51,29 +58,29 @@ const Navbar = () => {
     <div className='border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between'>
       <NavLink className='text-decoration-none' to={'/'}>
         <h2 className='logo mt-1' style={{ color: 'gold' }}>
-          Max Win
+          <img src={logo} width={60} alt="" />
         </h2>
       </NavLink>
       <div className='d-flex gap-2 gap-sm-4 align-items-center'>
         <button
-          className='border border-none bg-transparent'
+          className='bg-transparent btn'
           style={{ outline: 'none' }}
           onClick={handleShow}
         >
           <i className='fa-solid fa-wallet text-light'></i>
         </button>
-        <div className='text-light d-flex align-items-center flex-nowrap'>
-          <i className='fa-solid fa-life-ring text-light'></i>
-          <span className='mx-2 fw-bolder'>: 0</span>
-        </div>
-        <NavLink to={'/profile'}>
-          <i className='fa-solid fa-user text-light'></i>
-        </NavLink>
-        {auth ? (
+        {auth && (
+          <>
+          <NavLink to={'/profile'}>
+            <i className='fa-solid fa-user text-light'></i>
+          </NavLink>
           <button className='btn' onClick={logout}>
             <i className='fa-solid fa-right-from-bracket text-light'></i>
           </button>
-        ) : (
+          </>
+        )}
+        {!auth && (
+          <>
           <NavLink to={'/login'}>
             <button
               style={{
@@ -88,6 +95,7 @@ const Navbar = () => {
               LOGIN
             </button>
           </NavLink>
+          </>
         )}
       </div>
       <Modal show={show} onHide={handleClose} animation={false}>
