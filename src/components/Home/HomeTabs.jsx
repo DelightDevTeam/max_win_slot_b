@@ -264,6 +264,7 @@ function HomeTabs() {
                         localStorage.setItem('title', slotGame.description);
                       }}
                     >
+                      {/* fix error */}
                       <img
                         className={`img-fluid rounded-sm-5 gameImg`}
                         src={slotGame.img_url}
