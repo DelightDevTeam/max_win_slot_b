@@ -2,39 +2,33 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BASE_URL from '../hooks/baseURL';
-import { DevTool } from '@hookform/devtools';
 
 function LoginPage() {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [loginForm, setLoginForm] = useState({
-    username: '',
-    password: '',
-  });
+  const [auth, setAuth] = useState(null); // State to hold authentication status
   const navigate = useNavigate();
   const form = useForm({
     mode: 'onTouched',
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  let auth = localStorage.getItem('authToken');
-
   useEffect(() => {
-    if (auth) {
-      navigate('/');
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setAuth(true); // User is logged in
+      navigate('/'); // Redirect to home page
+    } else {
+      setAuth(false); // User is not logged in
     }
-  }, [auth]);
+  }, [navigate]);
 
   const onSubmit = (loginData) => {
-    console.log(loginData);
-    if (loginData) {
-      setLoading(true);
-    }
-
+    setLoading(true);
     //fetch api for login url
     fetch(BASE_URL + '/login', {
       method: 'POST',
@@ -51,21 +45,16 @@ function LoginPage() {
         return response.json();
       })
       .then((responseData) => {
-        if (responseData) {
-          const userData = responseData.data.user;
-          localStorage.setItem('authToken', responseData.data.token);
-        } else {
-          throw new Error('Token not found in response');
-        }
+        const userData = responseData.data.user;
+        localStorage.setItem('authToken', responseData.data.token);
+        setAuth(true); // User is logged in
         setLoading(false);
         navigate('/');
       })
       .catch((error) => {
         console.error(error);
-        if (error) {
-          setErrorMessage('Phone Or Password is incorrect!');
-          setLoading(false);
-        }
+        setErrorMessage('Phone Or Password is incorrect!');
+        setLoading(false);
       });
   };
 
