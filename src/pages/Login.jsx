@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import BASE_URL from "../hooks/baseURL";
 import { DevTool } from "@hookform/devtools";
 
-function LoginPage() {
+function Login() {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -124,4 +124,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;
