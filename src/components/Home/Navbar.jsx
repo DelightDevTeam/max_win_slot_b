@@ -7,17 +7,19 @@ import axios from "axios";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState(false);
-
-  const handleShow = () => setShow(true);
-
   const [auth, setAuth] = useState();
 
   useEffect(() => {
     setAuth(localStorage.getItem("authToken"));
-  }, [auth]);
-
+  }, []);
   const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  let navigate = useNavigate();
+  const [smallLoad, setSmallLoad] = useState(false);
+  const [wallets, setWallets] = useState();
+  const [user, setUser] = useState();
+
+  // console.log(wallets);
 
   const logout = () => {
     // Your logout logic here
@@ -86,11 +88,9 @@ const Navbar = () => {
         <NavLink to={"/profile"}>
           <i className="fa-solid fa-user text-light"></i>
         </NavLink>
-        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
-
         {auth ? (
           <button className="btn" onClick={logout}>
-            <i class="fa-solid fa-right-from-bracket text-light"></i>
+            <i className="fa-solid fa-right-from-bracket text-light"></i>
           </button>
         ) : (
           <NavLink to={"/login"}>
