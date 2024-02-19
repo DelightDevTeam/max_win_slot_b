@@ -1,54 +1,70 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Modal, Table } from "react-bootstrap";
+import BASE_URL from "../../hooks/baseURL";
+import axios from "axios";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState(false);
-
-  const handleShow = () => setShow(true);
-
   const [auth, setAuth] = useState();
 
   useEffect(() => {
     setAuth(localStorage.getItem("authToken"));
   }, []);
-
   const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  let navigate = useNavigate();
+  const [smallLoad, setSmallLoad] = useState(false);
+  const [wallets, setWallets] = useState();
+  const [user, setUser] = useState();
+
+  // console.log(wallets);
 
   const logout = () => {
     // Your logout logic here
     localStorage.removeItem("authToken");
     setAuth(null); // Update auth state to reflect logout
   };
+
+  const getWallet = () => {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    };
+    axios
+      .get(BASE_URL + "/wallet/currentWallet", { headers })
+      .then((response) => setWallets(response.data.data));
+  };
+
+  const getAuthUser = () => {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    };
+    axios
+      .get(BASE_URL + "/user", { headers })
+      .then((response) => {
+        setUser(response.data.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    getWallet();
+    getAuthUser();
+  }, []);
+
   const modals = [
-    { id: 1, title: "MBBET", value: "0.00" },
-    { id: 2, title: "WBET", value: "0.00" },
-    { id: 3, title: "EVOLUTION GAMING", value: "0.00" },
-    { id: 4, title: "KING855", value: "0.00" },
-    { id: 5, title: "SA GAMING", value: "0.00" },
-    { id: 6, title: "WM CASINO", value: "0.00" },
-    { id: 7, title: "YEEBET", value: "0.00" },
-    { id: 1, title: "DRAGON SOFT", value: "0.00" },
-    { id: 2, title: "EVOPLAY", value: "maintainance" },
-    { id: 3, title: "GAMEPLAY", value: "0.00" },
-    { id: 4, title: "JOKER", value: "0.00" },
-    { id: 5, title: "MICROGAMING", value: "0.00" },
-    { id: 6, title: "PG SOFT", value: "0.00" },
-    { id: 7, title: "PNG", value: "0.00" },
-    { id: 2, title: "PRAGEMIC", value: "maintainance" },
-    { id: 3, title: "SIMPLEPLAY", value: "0.00" },
-    { id: 4, title: "DIGMANN", value: "0.00" },
-    { id: 5, title: "ALLBET", value: "0.00" },
-    { id: 6, title: "LIVE22", value: "0.00" },
-    { id: 7, title: "Pinnacle", value: "0.00" },
-    { id: 2, title: "RCB988", value: "maintainance" },
-    { id: 3, title: "SBO", value: "0.00" },
-    { id: 4, title: "ROYAL SLOT", value: "0.00" },
-    { id: 5, title: "ADVANTPLAY", value: "0.00" },
-    { id: 6, title: "JILI", value: "0.00" },
-    { id: 7, title: "SEXY BACCARAT", value: "0.00" },
+    { id: 1, title: "ASIAGAMING", value: wallets?.ag_wallet },
+    { id: 2, title: "GAMEPLAY", value: wallets?.g8_wallet },
+    { id: 3, title: "BBIN", value: wallets?.gb_wallet },
+    { id: 4, title: "JDB", value: wallets?.jd_wallet },
+    { id: 5, title: "JOKER", value: wallets?.jk_wallet },
+    { id: 6, title: "KING855", value: wallets?.k9_wallet },
+    { id: 7, title: "NEW LIVE22", value: wallets?.l4_wallet },
+    { id: 8, title: "PGSOFT", value: wallets?.pg_wallet },
+    { id: 9, title: "PRAGMATIC", value: wallets?.pr_wallet },
+    { id: 10, title: "KING MAKER", value: wallets?.re_wallet },
+    { id: 11, title: "SBO", value: wallets?.s3_wallet },
   ];
   return (
     <div className="border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between">
@@ -72,11 +88,9 @@ const Navbar = () => {
         <NavLink to={"/profile"}>
           <i className="fa-solid fa-user text-light"></i>
         </NavLink>
-        {/* <NavLink to={'/incomeletter'}><i   class="fa-solid fa-comment-dots text-light"></i></NavLink> */}
-
         {auth ? (
           <button className="btn" onClick={logout}>
-            <i class="fa-solid fa-right-from-bracket text-light"></i>
+            <i className="fa-solid fa-right-from-bracket text-light"></i>
           </button>
         ) : (
           <NavLink to={"/login"}>
@@ -108,12 +122,13 @@ const Navbar = () => {
               </tr>
             </thead>
             <tbody>
-              {modals.map((modal) => (
-                <tr>
-                  <td>{modal.title}</td>
-                  <td>{modal.value}</td>
-                </tr>
-              ))}
+              {modals &&
+                modals.map((modal) => (
+                  <tr>
+                    <td>{modal.title}</td>
+                    <td>{modal.value}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </Modal.Body>
