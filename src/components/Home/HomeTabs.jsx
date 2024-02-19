@@ -133,6 +133,7 @@ function HomeTabs() {
               {tabs.map((tab) => {
                 return (
                   <Nav.Link
+                    key={tab.id}
                     className="border rounded-3 mb-1 py-0 py-sm-1 mb-sm-2 px-0 d-flex flex-column align-items-center "
                     eventKey={tab.id}
                   >
@@ -153,6 +154,7 @@ function HomeTabs() {
                 {slotGames.providers?.map((slotGame) => {
                   return (
                     <Link
+                      key={slotGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3 mb-4"
                       onClick={() => {
@@ -179,6 +181,7 @@ function HomeTabs() {
                 {sportGames.providers?.map((sportGame) => {
                   return (
                     <Link
+                      key={sportGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-6 mb-4"
                       onClick={() => {
@@ -205,6 +208,7 @@ function HomeTabs() {
                 {casinoGames.providers?.map((casinoGame) => {
                   return (
                     <Link
+                      key={casinoGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
@@ -244,6 +248,7 @@ function HomeTabs() {
                 {slotGames.providers?.map((slotGame) => {
                   return (
                     <Link
+                      key={slotGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3 mb-4"
                       onClick={() => {
@@ -258,6 +263,7 @@ function HomeTabs() {
                         localStorage.setItem("title", slotGame.description);
                       }}
                     >
+                      {/* fix error */}
                       <img
                         className={`img-fluid rounded-sm-5 gameImg`}
                         src={slotGame.img_url}
@@ -270,6 +276,7 @@ function HomeTabs() {
                 {sportGames.providers?.map((sportGame) => {
                   return (
                     <Link
+                      key={sportGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3 mb-4"
                       onClick={() => {
@@ -296,6 +303,7 @@ function HomeTabs() {
                 {casinoGames.providers?.map((casinoGame) => {
                   return (
                     <Link
+                      key={casinoGame.id}
                       to={"/games"}
                       className="col-6 col-lg-4 col-xl-3"
                       onClick={() => {
