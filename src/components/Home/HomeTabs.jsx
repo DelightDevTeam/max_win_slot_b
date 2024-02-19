@@ -79,12 +79,12 @@ function HomeTabs() {
   const { data: hotGames } = useFetch(BASE_URL + '/hotgame');
   console.log(hotGames);
   const tabs = [
-    { id: 1, img: allGames, title: 'All Games' },
-    { id: 2, img: hot, title: 'Hot Games' },
-    { id: 3, img: slots, title: 'Slots' },
-    { id: 4, img: sport, title: 'Sports' },
+    { id: 1, img: allGames, title: "ALL GAMES" },
+    { id: 2, img: hot, title: "HOT GAMES" },
+    { id: 3, img: slots, title: "SLOTS" },
+    { id: 4, img: sport, title: "SPORTBOOK" },
     // {id:2,img:esport,title:'E-Sports'},
-    { id: 5, img: casino, title: 'Live Casinos' },
+    { id: 5, img: casino, title: "LIVE-CASINO" },
     // {id:6,img:cock,title:'Cock Fighting'},
     // {id:7,img:horse,title:'Horse Racing'},
   ];
@@ -235,8 +235,7 @@ function HomeTabs() {
                 {hotGames?.map((hotGame) => {
                   return (
                     <img
-                      key={hotGame.id}
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: "cover" }}
                       className={`img-fluid hotGameImg  col-6 col-lg-4 col-xl-3 mb-4  rounded-sm-5`}
                       src={hotGame.img_url}
                       onClick={() => launchGame(hotGame.id)}
