@@ -1,3 +1,3 @@
-const URL = "https://www.spidermanmm.com";
+const URL = "https://maxwinapi.online";
 
 export default URL;
