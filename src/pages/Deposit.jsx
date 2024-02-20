@@ -6,7 +6,7 @@ import { Accordion } from "react-bootstrap";
 
 import deposit from "./../assets/img/playerInfo/deposit.png";
 import transfer from "./../assets/img/playerInfo/transfer.png";
-import withdraw from "./../assets/img/playerInfo/withdraw.png";
+import wt from "./../assets/img/playerInfo/withdraw.png"
 import wallet from "./../assets/img/footerIcons/wallet.png";
 
 import "./../assets/css/deposit.css";
@@ -195,7 +195,7 @@ const Deposit = () => {
                 alt="deposit"
                 className="custom-tab-menu-icon"
               />{" "}
-              <div className="text-white">ငွေသွင်း</div>
+              <div className="text-white">deposit</div>
             </>
           }
         >
@@ -373,7 +373,7 @@ const Deposit = () => {
           title={
             <>
               <img
-                src={withdraw}
+                src={wt}
                 alt="Withdraw"
                 className="custom-tab-menu-icon"
               />{" "}
@@ -488,7 +488,7 @@ const Deposit = () => {
           title={
             <>
               <img
-                src={withdraw}
+                src={wt}
                 alt="Histpry"
                 className="custom-tab-menu-icon"
               />{" "}
