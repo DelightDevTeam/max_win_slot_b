@@ -10,7 +10,7 @@ import wt from "./../assets/img/playerInfo/withdraw.png";
 import wallet from "./../assets/img/footerIcons/wallet.png";
 
 import "./../assets/css/deposit.css";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../hooks/baseURL";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Deposit = () => {
+  let auth = localStorage.getItem("authToken");
   const [searchParams] = useSearchParams();
   const [providers, setProviders] = useState();
   const [loader, setLoader] = useState(false);
@@ -25,6 +26,12 @@ const Deposit = () => {
   const [user, setUser] = useState();
   const [banks, setBanks] = useState();
   // console.log(banks);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
   const form = useForm({
     mode: "onTouched",
   });
@@ -176,7 +183,9 @@ const Deposit = () => {
     <>
       <div className="ms-md-5 ms-3" style={{ color: "#ddd" }}>
         <small>လက်ကျန်ငွေ ( MMK )</small>
-        <p className="fw-bold">0.00</p>
+        <p className="fw-bold">
+          {parseFloat(user?.balance).toLocaleString()} MMK
+        </p>
       </div>
 
       <Tabs
