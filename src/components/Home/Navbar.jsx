@@ -81,7 +81,12 @@ const Navbar = () => {
           <img src={logo} width={60} alt="" />
         </h2>
       </NavLink>
-      <div className="d-flex gap-2 gap-sm-4 align-items-center">
+      <div className="d-flex gap-2 gap-sm-4 align-items-center text-white">
+        <div>
+        <i class="fa-solid fa-user"></i>
+        <span className='fw-bold ms-2 me-3'>ID :</span>
+        <span>1234567</span>
+        </div>
         <button
           className='bg-transparent btn'
           style={{ outline: 'none' }}

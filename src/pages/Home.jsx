@@ -9,7 +9,6 @@ const Home = () => {
     <div className='px-2 px-xl-5'>
       <Carousel/>
       <Marquee/>
-      <PlayerInfo/>
       <HomeTabs/>
     </div>
   )
