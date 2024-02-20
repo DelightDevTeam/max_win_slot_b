@@ -20,6 +20,9 @@ const Profile = () => {
   const {data:user} = useFetch(BASE_URL + '/user');
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -71,6 +74,51 @@ const Profile = () => {
       .then(data => {
         // console.log(data);
         setSuccess("Profile Updated Successfully.");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  const handlePassword = (e) => {
+    e.preventDefault();
+    const inputData = {
+      currentPassword: currentPassword,
+      password: password
+    }
+    // console.log(inputData);
+    fetch(BASE_URL + '/changePassword', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + localStorage.getItem("authToken")
+      },
+      body: JSON.stringify(inputData)
+    })
+      .then(async response => {
+        if (!response.ok) {
+          let errorData;
+          try {
+            errorData = await response.json();
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+          if (response.status === 422) {
+            setError(errorData.errors);
+            console.error(`${response.status}:`, errorData);
+          }else if (response.status === 401) {
+            setError(errorData.message);
+            console.error(`${response.status}:`, errorData);
+          }else{
+            console.error(`Unexpected error with status ${response.status}`);
+          }
+        }
+        return response.json();
+      })
+      .then(data => {
+        // console.log(data);
+        setSuccess("New Password Changed Successfully.");
       })
       .catch(error => {
         console.error(error);
@@ -147,18 +195,34 @@ const Profile = () => {
           <Tab eventKey="change-password" className="custom-tab-menu nav-tabs" title={<><img src={Password} alt="Change Password" className="custom-tab-menu-icon"/> <div  >စကား၀ှက် ပြောင်းပါ</div></>}>
             <div className="custom-tab-content">
               {
-                <Form>
+                <Form onSubmit={handlePassword}>
+                  {success && <Alert variant="success">{success}</Alert>}
+                  {/* {error && <Alert className='bg-danger text-white' variant="fail">{error}</Alert>} */}
+                  
                 <Form.Group className="mb-3" controlId="passwordForm.ControlInput1">
                   <Form.Label>Current Password</Form.Label>
-                  <Form.Control className='form-control-input' type="password" placeholder="" required/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="passwordForm.ControlInput2">
-                  <Form.Label>New Password</Form.Label>
-                  <Form.Control className='form-control-input' type="password" placeholder="" required/>
+                  <Form.Control 
+                  className='form-control-input' 
+                  type="password" 
+                  placeholder=""
+                  onChange={(e) => setCurrentPassword(e.target.value)} 
+                  value={currentPassword}/>
+                    {error.currentPassword && (
+                      <span className="text-danger">*{error.currentPassword}</span>
+                    )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="passwordForm.ControlInput3">
-                  <Form.Label>Comfirm Password</Form.Label>
-                  <Form.Control className='form-control-input' type="password" placeholder="" required/>
+                  <Form.Label>New Password</Form.Label>
+                  <Form.Control 
+                  className='form-control-input' 
+                  type="password" 
+                  placeholder="" 
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  />
+                  {error.password && (
+                      <span className="text-danger">*{error.password}</span>
+                    )}
                 </Form.Group>
                 <div className='d-flex justify-content-center mt-5'>
                 <button className='profile-btn w-100'>တင်သွင်းသည်</button>
