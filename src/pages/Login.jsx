@@ -51,6 +51,7 @@ function Login() {
         return response.json();
       })
       .then((responseData) => {
+        // console.log(responseData);
         if (responseData) {
           const userData = responseData.data.user;
           localStorage.setItem("authToken", responseData.data.token);

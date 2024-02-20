@@ -6,7 +6,7 @@ import { Accordion } from "react-bootstrap";
 
 import deposit from "./../assets/img/playerInfo/deposit.png";
 import transfer from "./../assets/img/playerInfo/transfer.png";
-import wt from "./../assets/img/playerInfo/withdraw.png"
+import wt from "./../assets/img/playerInfo/withdraw.png";
 import wallet from "./../assets/img/footerIcons/wallet.png";
 
 import "./../assets/css/deposit.css";
@@ -194,7 +194,7 @@ const Deposit = () => {
                 src={deposit}
                 alt="deposit"
                 className="custom-tab-menu-icon"
-              />{" "}
+              />
               <div className="text-white">deposit</div>
             </>
           }
@@ -372,11 +372,7 @@ const Deposit = () => {
           className="custom-tab-menu"
           title={
             <>
-              <img
-                src={wt}
-                alt="Withdraw"
-                className="custom-tab-menu-icon"
-              />{" "}
+              <img src={wt} alt="Withdraw" className="custom-tab-menu-icon" />{" "}
               <div className="text-white">withdraw</div>
             </>
           }
@@ -482,16 +478,12 @@ const Deposit = () => {
             }
           </div>
         </Tab>
-        <Tab
+        {/* <Tab
           eventKey="history"
           className="custom-tab-menu"
           title={
             <>
-              <img
-                src={wt}
-                alt="Histpry"
-                className="custom-tab-menu-icon"
-              />{" "}
+              <img src={wt} alt="Histpry" className="custom-tab-menu-icon" />{" "}
               <div className="text-white">history</div>
             </>
           }
@@ -529,7 +521,7 @@ const Deposit = () => {
               </Form>
             }
           </div>
-        </Tab>
+        </Tab> */}
       </Tabs>
     </>
   );
