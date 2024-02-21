@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Modal, Table } from 'react-bootstrap';
-import logo from '../../assets/img/logo.png'
-import axios from 'axios';
-import BASE_URL from '../../hooks/baseURL';
-
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Modal, Table } from "react-bootstrap";
+import logo from "../../assets/img/logo.png";
+import axios from "axios";
+import BASE_URL from "../../hooks/baseURL";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   // const [auth, setAuth] = useState();
-  const auth = localStorage.getItem('authToken');
+  const auth = localStorage.getItem("authToken");
 
-    useEffect(() => {
-
-    }, [auth]);
+  useEffect(() => {}, [auth]);
 
   // useEffect(() => {
   //   setAuth(localStorage.getItem('authToken'));
@@ -27,11 +24,11 @@ const Navbar = () => {
   const [wallets, setWallets] = useState();
   const [user, setUser] = useState();
 
-  // console.log(wallets);
+  // console.log(user);
 
   const logout = () => {
     // Your logout logic here
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     navigate("/");
   };
 
@@ -75,51 +72,55 @@ const Navbar = () => {
     { id: 11, title: "SBO", value: wallets?.s3_wallet },
   ];
   return (
-    <div className='border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between'>
-      <NavLink className='text-decoration-none' to={'/'}>
-        <h2 className='logo mt-1' style={{ color: 'gold' }}>
+    <div className="border-bottom py-sm-1 py-3 px-2 px-sm-5 d-flex flex-wrap align-items-center justify-content-between">
+      <NavLink className="text-decoration-none" to={"/"}>
+        <h2 className="logo mt-1" style={{ color: "gold" }}>
           <img src={logo} width={60} alt="" />
         </h2>
       </NavLink>
       <div className="d-flex gap-2 gap-sm-4 align-items-center text-white">
-        <div>
-        <i class="fa-solid fa-user"></i>
-        <span className='fw-bold ms-2 me-3'>ID :</span>
-        <span>1234567</span>
-        </div>
-        <button
-          className='bg-transparent btn'
-          style={{ outline: 'none' }}
-          onClick={handleShow}
-        >
-          <i className="fa-solid fa-wallet text-light"></i>
-        </button>
+        {auth && (
+          <div>
+            <i class="fa-solid fa-user"></i>
+            <span className="fw-bold ms-2 me-3">ID :</span>
+            <span>1234567</span>
+          </div>
+        )}
+        {auth && (
+          <button
+            className="bg-transparent btn"
+            style={{ outline: "none" }}
+            onClick={handleShow}
+          >
+            <i className="fa-solid fa-wallet text-light"></i>
+          </button>
+        )}
         {auth && (
           <>
-          <NavLink to={'/profile'}>
-            <i className='fa-solid fa-user text-light'></i>
-          </NavLink>
-          <button className='btn' onClick={logout}>
-            <i className='fa-solid fa-right-from-bracket text-light'></i>
-          </button>
+            <NavLink to={"/profile"}>
+              <i className="fa-solid fa-user text-light"></i>
+            </NavLink>
+            <button className="btn" onClick={logout}>
+              <i className="fa-solid fa-right-from-bracket text-light"></i>
+            </button>
           </>
         )}
         {!auth && (
           <>
-          <NavLink to={'/login'}>
-            <button
-              style={{
-                border: "2px solid #FFD700",
-                background: "none",
-                fontSize: "13px",
-                color: "#FFD700",
-                padding: "6px 30px",
-              }}
-              className="bg-none rounded-2"
-            >
-              LOGIN
-            </button>
-          </NavLink>
+            <NavLink to={"/login"}>
+              <button
+                style={{
+                  border: "2px solid #FFD700",
+                  background: "none",
+                  fontSize: "13px",
+                  color: "#FFD700",
+                  padding: "6px 30px",
+                }}
+                className="bg-none rounded-2"
+              >
+                LOGIN
+              </button>
+            </NavLink>
           </>
         )}
       </div>
