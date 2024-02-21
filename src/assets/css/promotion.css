@@ -5,8 +5,8 @@
     padding: 10px 20px !important;
 }
 .nav-tabs .nav-link.active{
-    background: gold !important;
-    color: black !important;
+    background: #000 !important;
+    /* color: #fff !important; */
 }
 .nav-tabs{
     margin: 20px;

@@ -2,14 +2,18 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import BASE_URL from '../hooks/baseURL';
+import { DevTool } from '@hookform/devtools';
 
-function LoginPage() {
+function Login() {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [auth, setAuth] = useState(null); // State to hold authentication status
+  const [loginForm, setLoginForm] = useState({
+    username: '',
+    password: '',
+  });
   const navigate = useNavigate();
   const form = useForm({
     mode: 'onTouched',
@@ -17,13 +21,11 @@ function LoginPage() {
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
+  let auth = localStorage.getItem('authToken');
+
   useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      setAuth(true); // User is logged in
-      navigate('/'); // Redirect to home page
-    } else {
-      setAuth(false); // User is not logged in
+    if (auth) {
+      navigate('/');
     }
   }, [navigate]);
 
@@ -45,16 +47,22 @@ function LoginPage() {
         return response.json();
       })
       .then((responseData) => {
-        const userData = responseData.data.user;
-        localStorage.setItem('authToken', responseData.data.token);
-        setAuth(true); // User is logged in
+        // console.log(responseData);
+        if (responseData) {
+          const userData = responseData.data.user;
+          localStorage.setItem('authToken', responseData.data.token);
+        } else {
+          throw new Error('Token not found in response');
+        }
         setLoading(false);
         navigate('/');
       })
       .catch((error) => {
         console.error(error);
-        setErrorMessage('Phone Or Password is incorrect!');
-        setLoading(false);
+        if (error) {
+          setErrorMessage('Phone Or Password is incorrect!');
+          setLoading(false);
+        }
       });
   };
 
@@ -113,4 +121,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

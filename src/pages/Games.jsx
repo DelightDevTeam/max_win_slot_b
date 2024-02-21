@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import BASE_URL from "../hooks/baseURL";
+import { useNavigate } from "react-router-dom";
 
 export default function Games() {
+  let auth = localStorage.getItem("authToken");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
   let providerId = localStorage.getItem("provider_id");
   let gameTypeId = localStorage.getItem("gameType_id");
-  let auth = localStorage.getItem("authToken");
   let gameTitle = localStorage.getItem("title");
 
   const {
@@ -34,6 +41,7 @@ export default function Games() {
         return response.json();
       })
       .then((data) => {
+        // console.log(data);
         window.location.href = data.data;
       })
       .catch((error) => {
@@ -43,7 +51,7 @@ export default function Games() {
   return (
     <>
       <div className="container-fluid my-5">
-        <h3 className="text-center mb-5 fw-bold">{gameTitle}</h3>
+        <h3 className="text-center mb-5 text-light">{gameTitle}</h3>
         <div className="row">
           {games &&
             games.map((game, index) => (
@@ -62,7 +70,7 @@ export default function Games() {
                         className="img-fluid rounded shadow"
                         alt=""
                       />
-                      <p className="text-white mt-3">{game.name_en}</p>
+                      {/* <p className="text-white mt-3">{game.name_en}</p> */}
                     </div>
                   </>
                 )}
@@ -73,7 +81,7 @@ export default function Games() {
                       className="img-fluid rounded shadow"
                       alt=""
                     />
-                    <p className="text-white mt-3">{game.name_en}</p>
+                    {/* <p className="text-white mt-3">{game.name_en}</p> */}
                   </Link>
                 )}
               </div>

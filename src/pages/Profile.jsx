@@ -1,122 +1,242 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Form from 'react-bootstrap/Form';
-import {Link} from 'react-router-dom';
 import './../assets/css/profile.css';
-
 import profile from './../assets/img/profile.png';
-import Bank from './../assets/img/bank.png';
 import Password from './../assets/img/password.png';
-// import Rebate from './../assets/img/rebate.png';
-// import Voucher from './../assets/img/voucher.png';
-import avatar from './../assets/img/image-avatar-01.png';
+
+import useFetch from './../hooks/useFetch';
+import BASE_URL from '../hooks/baseURL';
+import PROFILE_URL from '../hooks/profileURL';
+import useFormSubmit from '../hooks/useFormSubmit';
+import { Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
+// import { useForm } from 'react-hook-form';
 
 const Profile = () => {
   const banks=['Yoma Bank','AYA Bank','CB Bank','KBZ Bank','Kpay','Wave Money'];
+  const {data:user} = useFetch(BASE_URL + '/user');
+  const [phone, setPhone] = useState("");
+  const [image, setImage] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+  // console.log(phone);
+
+  let auth = localStorage.getItem('authToken');
+  if (!auth) {
+    useEffect(() => {
+      navigate("/login"); // Navigate to the home route
+    }, [navigate]);
+  }
+  
+
+  const handleProfile = (e) => {
+    e.preventDefault();
+    const inputData = {
+      phone: phone,
+      image: image
+    }
+    fetch(BASE_URL + '/profile', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + localStorage.getItem("authToken")
+      },
+      body: JSON.stringify(inputData)
+    })
+      .then(async response => {
+        if (!response.ok) {
+          let errorData;
+          try {
+            errorData = await response.json();
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+          if (response.status === 422) {
+            setError(errorData.errors);
+            console.error(`${response.status}:`, errorData);
+          }else if (response.status === 401) {
+            setError(errorData.message);
+            console.error(`${response.status}:`, errorData);
+          }else{
+            console.error(`Unexpected error with status ${response.status}`);
+          }
+        }
+        return response.json();
+      })
+      .then(data => {
+        // console.log(data);
+        setSuccess("Profile Updated Successfully.");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  const handlePassword = (e) => {
+    e.preventDefault();
+    const inputData = {
+      currentPassword: currentPassword,
+      password: password
+    }
+    // console.log(inputData);
+    fetch(BASE_URL + '/changePassword', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: "Bearer " + localStorage.getItem("authToken")
+      },
+      body: JSON.stringify(inputData)
+    })
+      .then(async response => {
+        if (!response.ok) {
+          let errorData;
+          try {
+            errorData = await response.json();
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+          if (response.status === 422) {
+            setError(errorData.errors);
+            console.error(`${response.status}:`, errorData);
+          }else if (response.status === 401) {
+            setError(errorData.message);
+            console.error(`${response.status}:`, errorData);
+          }else{
+            console.error(`Unexpected error with status ${response.status}`);
+          }
+        }
+        return response.json();
+      })
+      .then(data => {
+        // console.log(data);
+        setSuccess("New Password Changed Successfully.");
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  useEffect(() => {
+    setPhone(user.phone);
+  }, [user]);
+
 
   return (
     <>
-
+    {user && (
+    <div className="row mt-4">
+      <div className="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
         <div className='d-flex justify-content-center align-items-center'>
-          <img src={avatar} alt="" />
+          <img className='rounded-circle border border-3 border-warning' src={user && PROFILE_URL+'/'+user.profile} width={100} alt="" />
           <div className='mx-3'>
-            <p className='fw-bold h3' style={{color:'#eee'}}>Angel</p>
-            <small style={{color:'#ddd'}}>Welcome to Max Win</small>
+            <p className='fw-bold h3' style={{color:'#eee'}}>{user.name}</p>
+            <span style={{color:'#ddd'}}><i className='fas fa-wallet'></i> {user?.balance?.toLocaleString('en-US')} MMK</span>
           </div>
         </div>
-
-
-      <Tabs
-      defaultActiveKey="home"
-      id="fill-tab-example"
-      className="mb-3"
-      fill
-    >
-      <Tab eventKey="home" className="custom-tab-menu nav-tabs" title={<><img src={profile} alt="Home" className="custom-tab-menu-icon" /> <div >ကိုယ်ရေးအကျည်း</div></>}>
-        <div className="custom-tab-content">
-          {
-              <Form>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-                <Form.Label>အသုံးပြုသူ အမည်</Form.Label>
-                <Form.Control className='form-control-input' type="email" placeholder="" />
-              </Form.Group>
-              <Form.Group className="mb-3 mx-md-5" controlId="exampleForm.ControlInput1">
-                <Form.Label>ဆက်သွယ်ရန် ဖုန်းနံပတ်</Form.Label>
-                <Form.Control className='form-control-input' type="email" placeholder="" />
-              </Form.Group>
-              <Form.Group className="mb-5 mx-md-5" controlId="exampleForm.ControlInput1">
-              <Form.Label >Image</Form.Label>
-              <Form.Control className='form-control-input'
-                type="file"
-              />
-              </Form.Group>
-              <div className='d-flex justify-content-center'>
-              <button className='profile-btn w-75'>တင်သွင်းသည်</button>
-              </div>
-            </Form>
-          }
-        </div>
-      </Tab>
-     
-      <Tab eventKey="change-password" className="custom-tab-menu" title={<><img src={Password} alt="Change Password" className="custom-tab-menu-icon"/> <div  >စကား၀က်ကို ပြောင်းပါ</div></>}>
-        <div className="custom-tab-content">
-          {
-            <Form>
-            <Form.Group className="mb-3 mx-5" controlId="passwordForm.ControlInput1">
-              <Form.Label>Current Password</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="" required/>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="passwordForm.ControlInput2">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="" required/>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="passwordForm.ControlInput3">
-              <Form.Label>Comfirm Password</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="" required/>
-            </Form.Group>
-            <div className='d-flex justify-content-center'>
-            <button className='profile-btn w-75'>တင်သွင်းသည်</button>
+        <Tabs
+          defaultActiveKey="home"
+          id="fill-tab-example"
+          className="mb-3"
+          fill
+        >
+          <Tab eventKey="home" className="custom-tab-menu nav-tabs" title={<><img src={profile} alt="Home" className="custom-tab-menu-icon" /> <div >ကိုယ်ရေးအကျဥ်း</div></>}>
+            <div className="custom-tab-content">
+              {success && <Alert variant="success">{success}</Alert>}
+              {
+                <Form onSubmit={handleProfile}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>အသုံးပြုသူ အမည်</Form.Label>
+                    <Form.Control 
+                    className='form-control-input' 
+                    type="text" 
+                    placeholder="Enter Username" readOnly
+                    value={user && user.name}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="phone">
+                    <Form.Label>ဆက်သွယ်ရန် ဖုန်းနံပတ်</Form.Label>
+                    <Form.Control 
+                    className='form-control-input' 
+                    type="number" 
+                    placeholder="" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    />
+                    {error.phone && (
+                      <span className="text-danger">*{error.phone}</span>
+                    )}
+                  </Form.Group>
+                  <Form.Group className="mb-5" controlId="image">
+                  <Form.Label >Image</Form.Label>
+                  <Form.Control 
+                  className='form-control-input'
+                  type="file"
+                  value={image}
+                  onChange={(e) => setImage(e.target.files[0])}
+                  />
+                  </Form.Group>
+                  <div className='d-flex justify-content-center'>
+                  <button className='profile-btn w-100' type='submit'>တင်သွင်းသည်</button>
+                  </div>
+                </Form>
+              }
             </div>
-          </Form>
-          }
-        </div>
-      </Tab>
-      {/* <Tab eventKey="rebate" className="custom-tab-menu" title={<><img src={Rebate} alt="Reabate" className="custom-tab-menu-icon" /> <div className='text-white'>Refferrer Rebate</div></>} >
-        <div className="custom-tab-content">
-          {
-            <Form>
-              <Form.Group className="mb-3 mx-5" controlId="rebateForm.ControlInput1">
-              <Form.Label>From</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="" required/>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="rebateForm.ControlInput1">
-              <Form.Label>To</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="" required/>
-              <div className='d-flex justify-content-center mt-5'>
-              <button className='profile-btn w-75'>တင်သွင်းသည်</button>
-              </div>
-            </Form.Group>
-            </Form>
-          }
-        </div>
-      </Tab> */}
-      {/* <Tab eventKey="vocher" className="custom-tab-menu" title={<><img src={Voucher} alt="Vocher" className="custom-tab-menu-icon" /> <div className='text-white'>Vocher</div></>} >
-        <div className="custom-tab-content">
-          {
-            <Form>
-              <Form.Group className="mb-3 mx-5" controlId="voucherForm.ControlInput1">
-              <Form.Label>ဘောက်ချာ</Form.Label>
-              <Form.Control className='form-control-input' type="password" placeholder="ဘောက်ချာကုတ်" required/>
-              </Form.Group>
-              <div className='d-flex justify-content-center'>
-              <button className='profile-btn w-75'>တင်သွင်းသည်</button>
-              </div>
-            </Form>
-          }
-        </div>
-      </Tab> */}
-    </Tabs>
+          </Tab>
+        
+          <Tab eventKey="change-password" className="custom-tab-menu nav-tabs" title={<><img src={Password} alt="Change Password" className="custom-tab-menu-icon"/> <div  >စကား၀ှက် ပြောင်းပါ</div></>}>
+            <div className="custom-tab-content">
+              {
+                <Form onSubmit={handlePassword}>
+                  {success && <Alert variant="success">{success}</Alert>}
+                  {/* {error && <Alert className='bg-danger text-white' variant="fail">{error}</Alert>} */}
+                  
+                <Form.Group className="mb-3" controlId="passwordForm.ControlInput1">
+                  <Form.Label>Current Password</Form.Label>
+                  <Form.Control 
+                  className='form-control-input' 
+                  type="password" 
+                  placeholder=""
+                  onChange={(e) => setCurrentPassword(e.target.value)} 
+                  value={currentPassword}/>
+                    {error.currentPassword && (
+                      <span className="text-danger">*{error.currentPassword}</span>
+                    )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="passwordForm.ControlInput3">
+                  <Form.Label>New Password</Form.Label>
+                  <Form.Control 
+                  className='form-control-input' 
+                  type="password" 
+                  placeholder="" 
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  />
+                  {error.password && (
+                      <span className="text-danger">*{error.password}</span>
+                    )}
+                </Form.Group>
+                <div className='d-flex justify-content-center mt-5'>
+                <button className='profile-btn w-100'>တင်သွင်းသည်</button>
+                </div>
+              </Form>
+              }
+            </div>
+          </Tab>
+        </Tabs>
+      </div>
+    </div>
+    )}
+
+
     </>
   )
 }
