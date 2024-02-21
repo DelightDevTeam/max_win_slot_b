@@ -15,7 +15,7 @@ export default function Games() {
   } = useFetch(
     BASE_URL + "/gamedetail/" + providerId + "/game_type/" + gameTypeId
   );
-  // console.log(games);
+  console.log(games);
   const launchGame = (gameId) => {
     //fetch api calling
     fetch(BASE_URL + "/launchGame/" + gameId, {
@@ -34,6 +34,7 @@ export default function Games() {
         return response.json();
       })
       .then((data) => {
+        // console.log(data);
         window.location.href = data.data;
       })
       .catch((error) => {
@@ -62,7 +63,7 @@ export default function Games() {
                         className="img-fluid rounded shadow"
                         alt=""
                       />
-                      <p className="text-white mt-3">{game.name_en}</p>
+                      {/* <p className="text-white mt-3">{game.name_en}</p> */}
                     </div>
                   </>
                 )}
@@ -73,7 +74,7 @@ export default function Games() {
                       className="img-fluid rounded shadow"
                       alt=""
                     />
-                    <p className="text-white mt-3">{game.name_en}</p>
+                    {/* <p className="text-white mt-3">{game.name_en}</p> */}
                   </Link>
                 )}
               </div>

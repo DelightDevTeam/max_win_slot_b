@@ -77,7 +77,7 @@ function HomeTabs() {
   const { data: sportGames } = useFetch(BASE_URL + "/gameTypeProviders/3");
   const { data: casinoGames } = useFetch(BASE_URL + "/gameTypeProviders/2");
   const { data: hotGames } = useFetch(BASE_URL + "/hotgame");
-  console.log(hotGames);
+  console.log(sportGames);
   const tabs = [
     { id: 1, img: allGames, title: "ALL GAMES" },
     { id: 2, img: hot, title: "HOT GAMES" },
@@ -215,12 +215,12 @@ function HomeTabs() {
                         localStorage.removeItem("provider_id");
                         localStorage.removeItem("gameType_id");
                         localStorage.removeItem("title");
-                        localStorage.setItem("provider_id", casinoGames.id);
+                        localStorage.setItem("provider_id", casinoGame.id);
                         localStorage.setItem(
                           "gameType_id",
-                          casinoGames.pivot.game_type_id
+                          casinoGame.pivot.game_type_id
                         );
-                        localStorage.setItem("title", casinoGames.description);
+                        localStorage.setItem("title", casinoGame.description);
                       }}
                     >
                       <img
