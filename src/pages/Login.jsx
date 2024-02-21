@@ -18,7 +18,7 @@ function Login() {
   const form = useForm({
     mode: 'onTouched',
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
   let auth = localStorage.getItem('authToken');
@@ -27,14 +27,10 @@ function Login() {
     if (auth) {
       navigate('/');
     }
-  }, [auth]);
+  }, [navigate]);
 
   const onSubmit = (loginData) => {
-    console.log(loginData);
-    if (loginData) {
-      setLoading(true);
-    }
-
+    setLoading(true);
     //fetch api for login url
     fetch(BASE_URL + '/login', {
       method: 'POST',
