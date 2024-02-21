@@ -85,16 +85,18 @@ function Login() {
             </div>
           )}
           <Form.Group className='mb-3' controlId='formBasicEmail'>
-            <Form.Label className='text-warning fw-bolder'>Phone</Form.Label>
+            <Form.Label className='text-warning fw-bolder'>
+              Account ID
+            </Form.Label>
             <Form.Control
               type='text'
-              placeholder='Phone...'
-              {...register('phone', {
-                required: 'Phone is Required.',
+              placeholder='Account ID...'
+              {...register('name', {
+                required: 'Account ID is Required.',
               })}
-              className={`${errors.phone && 'border-2 border-danger'}`}
+              className={`${errors.name && 'border-2 border-danger'}`}
             />
-            <div className='error text-danger'>{errors.phone?.message}</div>
+            <div className='error text-danger'>{errors.name?.message}</div>
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formBasicPassword'>
