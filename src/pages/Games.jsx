@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import BASE_URL from "../hooks/baseURL";
+import { useNavigate } from "react-router-dom";
 
 export default function Games() {
+  let auth = localStorage.getItem("authToken");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  }, []);
   let providerId = localStorage.getItem("provider_id");
   let gameTypeId = localStorage.getItem("gameType_id");
-  let auth = localStorage.getItem("authToken");
   let gameTitle = localStorage.getItem("title");
 
   const {
