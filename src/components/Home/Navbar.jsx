@@ -91,14 +91,18 @@ const Navbar = () => {
           </div>
         )}
         {auth && (
-          <button
-            className='bg-transparent btn'
-            style={{ outline: 'none' }}
-            onClick={handleShow}
-          >
-            <i className='fa-solid fa-wallet text-light'></i>
-            <span>{user?.balance}</span>
-          </button>
+          <div className='d-flex gap-2 gap-sm-4 align-items-center text-white'>
+            <button
+              className='bg-transparent btn'
+              style={{ outline: 'none' }}
+              onClick={handleShow}
+            >
+              <i className='fa-solid fa-wallet text-light'></i>
+            </button>
+            <div>
+              <span>{user?.balance}</span>
+            </div>
+          </div>
         )}
         {auth && (
           <>
