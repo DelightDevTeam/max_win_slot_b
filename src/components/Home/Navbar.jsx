@@ -97,6 +97,7 @@ const Navbar = () => {
             onClick={handleShow}
           >
             <i className='fa-solid fa-wallet text-light'></i>
+            <span>{user?.balance}</span>
           </button>
         )}
         {auth && (
