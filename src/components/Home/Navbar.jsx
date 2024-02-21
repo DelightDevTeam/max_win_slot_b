@@ -84,7 +84,7 @@ const Navbar = () => {
           <div>
             <i class='fa-solid fa-user'></i>
             <span className='fw-bold ms-2 me-3'>ID :</span>
-            <span>1234567</span>
+            <span>{user?.name}</span>
           </div>
         )}
         {auth && (
