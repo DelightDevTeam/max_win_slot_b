@@ -125,6 +125,7 @@ const Navbar = () => {
           </>
         )}
       </div>
+      {/* change user name */}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title></Modal.Title>
