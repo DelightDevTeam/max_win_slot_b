@@ -100,7 +100,7 @@ const Navbar = () => {
               <i className='fa-solid fa-wallet text-light'></i>
             </button>
             <div>
-              <span>{user?.balance}</span>
+              <span>{user?.balance} MMK</span>
             </div>
           </div>
         )}
