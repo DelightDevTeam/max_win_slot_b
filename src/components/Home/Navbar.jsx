@@ -82,7 +82,10 @@ const Navbar = () => {
       <div className='d-flex gap-2 gap-sm-4 align-items-center text-white'>
         {auth && (
           <div>
-            <i class='fa-solid fa-user'></i>
+            {/* <i class='fa-solid fa-user'></i> */}
+            <NavLink to={'/profile'}>
+              <i className='fa-solid fa-user text-light'></i>
+            </NavLink>
             <span className='fw-bold ms-2 me-3'>ID :</span>
             <span>{user?.name}</span>
           </div>
@@ -98,9 +101,9 @@ const Navbar = () => {
         )}
         {auth && (
           <>
-            <NavLink to={'/profile'}>
+            {/* <NavLink to={'/profile'}>
               <i className='fa-solid fa-user text-light'></i>
-            </NavLink>
+            </NavLink> */}
             <button className='btn' onClick={logout}>
               <i className='fa-solid fa-right-from-bracket text-light'></i>
             </button>
