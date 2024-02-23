@@ -308,7 +308,7 @@ const Deposit = () => {
             }
           </div>
         </Tab>
-        <Tab
+        {/* <Tab
           eventKey="transfer"
           className="custom-tab-menu"
           title={
@@ -375,7 +375,7 @@ const Deposit = () => {
               </Form>
             }
           </div>
-        </Tab>
+        </Tab> */}
         <Tab
           eventKey="withdraw"
           className="custom-tab-menu"
